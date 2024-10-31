@@ -1,15 +1,12 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 import cv2
 import os
 import torch
 import torch.nn as nn
 import torchvision
 from torchvision.models import resnet50, ResNet50_Weights
-from torchvision.models.segmentation import deeplabv3_resnet50
-from torchvision.models.segmentation import DeepLabV3_ResNet50_Weights
 from sklearn.decomposition import PCA
 import shutil
 from sklearn.cluster import KMeans
@@ -22,7 +19,7 @@ def clustering():
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]
     
-    data_dir="/kaggle/input/wobot-technologies/task-1"
+    data_dir="data"
 
     #resnet model for feature extraction from the image
     weights = ResNet50_Weights.IMAGENET1K_V2
@@ -53,7 +50,7 @@ def clustering():
     
     #dimensionality reduction to prevent cod
     df=pd.DataFrame(data=np.array(hold))
-    pca = PCA(n_components=10,random_state=0)
+    pca = PCA(n_components=13,random_state=0)
     inter_df=pca.fit_transform(df)
         
     # kmeans clustering the image features
@@ -80,8 +77,8 @@ def clustering():
     plt.ylabel('Silhouette Score')
     plt.savefig("Silhouette_Score.jpg")
         
-    print("Based on Silhoute Score graph the number of cluster is set as 17")
-    kmeans = KMeans(n_clusters = 14, init = 'k-means++', max_iter = 1000, 
+    print("Based on Silhoute Score graph the number of cluster is set as 16")
+    kmeans = KMeans(n_clusters = 16, init = 'k-means++', max_iter = 1000, 
                     n_init = 10, random_state = 0)
     kmeans.fit(inter_df)
     labels = kmeans.labels_.tolist()
@@ -89,12 +86,12 @@ def clustering():
                       "label":labels})
     sub.head()
         
-    output_dir="/kaggle/working/output"
-    os.mkdir("/kaggle/working/output")
+    output_dir="output"
+    os.mkdir("output")
         
     #organzing images based on their label in output folder
     for i in range(1,sub["label"].nunique()+1):
-        subfolder=f"/kaggle/working/output/person_{i}"
+        subfolder=os.path.join(output_dir,f"person_{i}")
         os.mkdir(subfolder)
             
     for i in range(len(sub)):
@@ -109,5 +106,5 @@ def clustering():
         cv2.imwrite(output_path, img)
             
 def __main__():
-  clustering()
+    clustering()
     
