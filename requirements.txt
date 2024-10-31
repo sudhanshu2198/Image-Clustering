@@ -1,0 +1,8 @@
+pandas==2.2.3
+numpy==1.26.4
+cv2==4.10.0
+matplotlib==3.7.5
+torch==2.0.1
+torchvision==0.15.2
+sklearn==1.2.2
+ultralytics==8.3.25
