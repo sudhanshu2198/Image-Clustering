@@ -86,8 +86,8 @@ def clustering():
                       "label":labels})
     sub.head()
         
-    output_dir="output"
-    os.mkdir("output")
+    cwd=os.getcwd()
+    output_dir=os.path.join(cwd,"output")
         
     #organzing images based on their label in output folder
     for i in range(1,sub["label"].nunique()+1):
@@ -105,6 +105,7 @@ def clustering():
                     0.5,(255,0,0),1,1)
         cv2.imwrite(output_path, img)
             
-def __main__():
+if __name__ == "__main__":
     clustering()
+    print("Image Clustering Completed")
     

@@ -1,7 +1,8 @@
 pandas==2.2.3
 numpy==1.26.4
 matplotlib==3.7.5
-torch==2.0.1+cpu
-torchvision==0.15.2+cpu
+torch==2.0.1
+torchvision==0.15.2
 scikit-learn==1.2.2
 opencv-python-headless==4.5.4.60
+tqdm
