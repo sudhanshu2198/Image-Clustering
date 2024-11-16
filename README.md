@@ -1,7 +1,7 @@
 
-# Wobot Assignement
+# Image Clustering
 
-**The main goal of assignment is to organise images based on individual .**
+**The main goal of project is to organise images based on individual .**
 - The problem falls under unsupervised learning as the target labels are not given.
 - The solution involves utilizing pretrained model for features extraction and then clustering images based on the kmeans clustering .
 - The Resnet50 pertained model without classifier is used to extract features vectors of dimension 1268.
